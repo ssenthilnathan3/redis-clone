@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"net"
-	"github.com/ssenthilnathan3/resp"
 )
 
 func main() {
@@ -29,10 +28,10 @@ func main() {
 			return
 		}
 
-		fmt.Println(value)
+		_ = value
 
-		// ignore request and send back a PONG
-		conn.Write([]byte("+OK\r\n"))
+		writer := NewWriter(conn)
+		writer.Write(Value{typ: "string", str: "OK"})
 
 	}
 
